@@ -1,0 +1,394 @@
+---
+import 'leaflet/dist/leaflet.css';
+import '../styles/global.css';
+import {
+  anime,
+  academicLinks,
+  communities,
+  conferenceWork,
+  footerLinks,
+  interviews,
+  links,
+  location,
+  magazines,
+  moreTalksLink,
+  profile,
+  skills,
+  socialLinks,
+  spotifyPlaylist,
+  talks,
+  techBooks
+} from '../data/portfolio';
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="うーたん — サーバーサイドエンジニア。勉強会や技術コミュニティの運営にも取り組んでいます。"
+    />
+    <meta name="theme-color" content="#efeee9" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>うーたん — Server-side Engineer</title>
+  </head>
+  <body>
+    <main>
+      <header class="topbar">
+        <div class="topbar-actions">
+          <button class="theme-button" aria-label="表示テーマを切り替える">
+            <svg viewBox="0 0 24 24" aria-hidden="true"
+              ><path
+                d="M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.42 1.42m9.88 9.88 1.42 1.42m0-12.72-1.42 1.42M7.06 16.94l-1.42 1.42M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
+              ></path></svg
+            >
+          </button>
+        </div>
+      </header>
+
+      <section class="bento" aria-label="プロフィールとリンク">
+        <article class="card intro span-2x2">
+          <div class="portrait-switcher" aria-live="polite">
+            <img
+              class="portrait portrait-alias"
+              src="/profile.jpg"
+              alt="うーたんのプロフィールアイコン"
+            />
+            <img
+              class="portrait portrait-legal"
+              src="/instagram-profile.jpg"
+              alt="大森 裕介のプロフィール写真"
+            />
+          </div>
+          <div class="intro-copy">
+            <p class="eyebrow">Backend engineer</p>
+            <h1>
+              <span class="greeting" data-greeting>こんにちは、</span><br /><span data-display-name
+                >うーたん</span
+              >です。
+            </h1>
+          </div>
+          <button
+            class="identity-toggle"
+            type="button"
+            aria-label="本人写真と名前を表示する"
+            aria-pressed="false"
+          >
+            <span class="swap-icon" aria-hidden="true">⇄</span>
+          </button>
+        </article>
+
+        {
+          socialLinks.slice(0, 1).map((social) => (
+            <a
+              class={`card social ${social.cardClass}`}
+              href={social.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <div class="social-icon">
+                {social.icon === 'x' ? (
+                  '𝕏'
+                ) : (
+                  <img src="/github.svg" alt="" width="29" height="29" />
+                )}
+              </div>
+              <div>
+                <>
+                  <strong>{social.name}</strong>
+                  <span>{social.handle}</span>
+                </>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+          ))
+        }
+
+        <article class="card location" aria-label={`${location.label}の地図`}>
+          <div id="nerima-map" aria-label={`${location.label}周辺を表示する操作可能な地図`}></div>
+          <div class="cloud cloud-one"><i></i><i></i><i></i></div>
+          <div class="cloud cloud-two"><i></i><i></i><i></i></div>
+          <div class="plane" aria-hidden="true"><span>✈</span></div>
+          <div class="location-copy">
+            <strong>{location.label}</strong><span>{location.coordinatesLabel}</span>
+          </div>
+        </article>
+
+        {
+          socialLinks.slice(1).map((social) => (
+            <a
+              class={`card social ${social.cardClass}`}
+              href={social.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <div class="social-icon">
+                {social.icon === 'x' ? (
+                  '𝕏'
+                ) : (
+                  <img src="/github.svg" alt="" width="29" height="29" />
+                )}
+              </div>
+              <div>
+                <>
+                  <strong>{social.name}</strong>
+                  <span>{social.handle}</span>
+                </>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+          ))
+        }
+
+        <a class="card social note-card" href={links.note} target="_blank" rel="noreferrer">
+          <div class="social-icon note-logo">note</div>
+          <div><strong>note</strong><span>技術と活動の記録</span></div>
+          <span class="arrow">↗</span>
+        </a>
+      </section>
+
+      <section class="profile-detail" id="profile" aria-labelledby="about-heading">
+        <div class="section-heading">
+          <p>01 / About</p>
+          <h2 id="about-heading">これまでの歩みと、<br />学んできたこと。</h2>
+        </div>
+        <div class="bio-copy">
+          {profile.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          <div class="tags">
+            {
+              profile.tags.map((tag) => (
+                <a href={tag.url} target="_blank" rel="noreferrer">
+                  {tag.title}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="expertise" id="skills" aria-label="技術と経験">
+        <article class="skills-panel">
+          <div class="panel-head"><span>Skills</span><h2>技術スタック</h2><b>25+</b></div>
+          <div class="skill-groups">
+            {
+              skills.map((group) => (
+                <div class="skill-row">
+                  <>
+                    <h3>{group.area}</h3>
+                    <div>
+                      {group.items.map((item) => (
+                        <span>{item}</span>
+                      ))}
+                    </div>
+                  </>
+                </div>
+              ))
+            }
+          </div>
+        </article>
+      </section>
+
+      <div class="chapter-heading" id="activity">
+        <span>Activity archive</span><h2>書いたこと、話したこと、<br />場をつくったこと。</h2><p>
+          登壇、寄稿、コミュニティ運営の記録
+        </p>
+      </div>
+      <section class="directory" aria-label="活動と制作物">
+        <article class="list-panel panel-wide talks-panel">
+          <div class="panel-head"><span>01</span><h2>主な登壇資料</h2><b>{talks.length}</b></div>
+          <div class="link-list talks-list">
+            {
+              talks.map((item, index) => (
+                <a href={item.url} target="_blank" rel="noreferrer">
+                  <>
+                    <em>{String(index + 1).padStart(2, '0')}</em>
+                    <span>{item.title}</span>
+                    <i>↗</i>
+                  </>
+                </a>
+              ))
+            }
+            <a href={moreTalksLink.url} target="_blank" rel="noreferrer">
+              <em>…</em>
+              <span>{moreTalksLink.title}</span>
+              <i>↗</i>
+            </a>
+          </div>
+        </article>
+
+        <article class="list-panel interviews-panel">
+          <div class="panel-head">
+            <span>02</span><h2>インタビュー記事</h2><b>{interviews.length}</b>
+          </div>
+          <div class="link-list">
+            {
+              interviews.map((item) => (
+                <a href={item.url} target="_blank" rel="noreferrer">
+                  <>
+                    <span>{item.title}</span>
+                    <i>↗</i>
+                  </>
+                </a>
+              ))
+            }
+          </div>
+        </article>
+
+        <article class="list-panel warm">
+          <div class="panel-head">
+            <span>03</span><h2>コンピューター雑誌に寄稿</h2><b>{magazines.length}</b>
+          </div>
+          <div class="link-list">
+            {
+              magazines.map((item) => (
+                <a href={item.url} target="_blank" rel="noreferrer">
+                  <>
+                    <span>{item.title}</span>
+                    <i>↗</i>
+                  </>
+                </a>
+              ))
+            }
+          </div>
+        </article>
+
+        <article class="list-panel panel-wide dark-panel">
+          <div class="panel-head">
+            <span>04</span><h2>技術同人誌に寄稿</h2><b>{techBooks.length}</b>
+          </div>
+          <div class="link-list book-list">
+            {
+              techBooks.map((item) => (
+                <a href={item.url} target="_blank" rel="noreferrer">
+                  <>
+                    <span>{item.title}</span>
+                    <i>↗</i>
+                  </>
+                </a>
+              ))
+            }
+          </div>
+        </article>
+
+        <article class="list-panel green-panel">
+          <div class="panel-head">
+            <span>05</span><h2>関わっている勉強会・コミュニティー</h2><b>{communities.length}</b>
+          </div>
+          <div class="link-list">
+            {
+              communities.map((item) => (
+                <a href={item.url} target="_blank" rel="noreferrer">
+                  <>
+                    <span>
+                      <>
+                        <strong>{item.title}</strong>
+                        <small>{item.description}</small>
+                      </>
+                    </span>
+                    <i>↗</i>
+                  </>
+                </a>
+              ))
+            }
+          </div>
+        </article>
+
+        <article class="list-panel conference-panel">
+          <div class="panel-head">
+            <span>06</span><h2>カンファレンス・運営活動</h2><b>{conferenceWork.length}</b>
+          </div>
+          <div class="link-list activity-list">
+            {
+              conferenceWork.map((item) => (
+                <div class="activity-item">
+                  <span>
+                    <>
+                      <strong>{item.title}</strong>
+                      <small>{item.role}</small>
+                    </>
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </article>
+
+        <article class="list-panel academic-panel">
+          <div class="panel-head"><span>07</span><h2>研究・受賞</h2><b>02</b></div>
+          <div class="academic-intro">
+            <span>Academic work</span>
+            <p>公立千歳科学技術大学での研究と、その成果に関する記録です。</p>
+          </div>
+          <div class="link-list academic-links">
+            {
+              academicLinks.map((link) => (
+                <a href={link.url} target="_blank" rel="noreferrer">
+                  <>
+                    <span>
+                      <>
+                        <strong>{link.title}</strong>
+                        <small>{link.description}</small>
+                      </>
+                    </span>
+                    <i>{link.actionLabel}</i>
+                  </>
+                </a>
+              ))
+            }
+          </div>
+        </article>
+
+        <article class="list-panel pink-panel">
+          <div class="panel-head"><span>08</span><h2>好きなアニメ</h2><b>{anime.length}</b></div>
+          <div class="link-list">
+            {
+              anime.map((item) => (
+                <a href={item.url} target="_blank" rel="noreferrer">
+                  <>
+                    <span>{item.title}</span>
+                    <i>↗</i>
+                  </>
+                </a>
+              ))
+            }
+          </div>
+        </article>
+
+        <article class="list-panel music-panel">
+          <div class="panel-head"><span>09</span><h2>好きな音楽</h2><b>Playlist</b></div>
+          <div class="spotify-embed">
+            <iframe
+              src={spotifyPlaylist.src}
+              title={spotifyPlaylist.title}
+              loading="lazy"
+              allow={spotifyPlaylist.allow}></iframe>
+          </div>
+        </article>
+      </section>
+
+      <section class="all-links" id="links" aria-label="すべてのプロフィールリンク">
+        <span>Elsewhere</span>
+        <div>
+          {
+            footerLinks.map((link) => (
+              <a href={link.url} target="_blank" rel="noreferrer">
+                {link.title}
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <footer><span>© 2026 うーたん / Yusuke Ohmori</span></footer>
+    </main>
+
+    <script src="../scripts/portfolio.ts"></script>
+  </body>
+</html>
