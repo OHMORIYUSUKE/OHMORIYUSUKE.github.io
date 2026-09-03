@@ -29,12 +29,35 @@
 :root.dark .github div span {
   color: rgba(239, 245, 232, 0.68);
 }
+:root.dark .github .social-icon img,
+:root.dark .note-card .social-icon img {
+  filter: brightness(0) invert(1);
+}
 :root.dark .note-card {
   background: #2f4058;
   color: #edf3fc;
 }
 :root.dark .note-card div span {
   color: rgba(237, 243, 252, 0.68);
+}
+:root.dark .location {
+  background: #29342e;
+  color: #edf3ee;
+}
+:root.dark .location .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) saturate(0.36) brightness(0.7) contrast(0.92);
+}
+:root.dark .location .leaflet-control-zoom a {
+  background: rgba(37, 48, 42, 0.92);
+  color: #edf3ee;
+}
+:root.dark .location .leaflet-control-attribution {
+  background: rgba(37, 48, 42, 0.78);
+  color: #c4d0c8;
+}
+:root.dark .location-copy {
+  background: rgba(37, 48, 42, 0.88);
+  color: #edf3ee;
 }
 :root.dark .profile-detail {
   background: #302d3b;
@@ -774,6 +797,9 @@ footer {
 .dark-panel .panel-head span,
 .dark-panel .panel-head b {
   color: rgba(255, 255, 255, 0.55);
+}
+.dark-panel[data-card-label]::before {
+  color: rgba(255, 255, 255, 0.62);
 }
 .green-panel {
   background: #dee8c3;

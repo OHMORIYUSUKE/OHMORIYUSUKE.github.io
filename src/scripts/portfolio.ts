@@ -40,16 +40,7 @@ identityToggle?.addEventListener('click', () => {
 });
 
 const greeting = document.querySelector<HTMLElement>('[data-greeting]');
-const greetings = [
-  'こんにちは、',
-  'Hello,',
-  'Hola,',
-  'Bonjour,',
-  'Hallo,',
-  'Ciao,',
-  '안녕하세요,',
-  '你好，'
-];
+const greetings = ['こんにちは、', 'Hello,', 'Hola,', 'Bonjour,', 'Ciao,', '안녕하세요,', '你好，'];
 
 if (greeting && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   let greetingIndex = 0;
