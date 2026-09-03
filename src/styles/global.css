@@ -59,6 +59,11 @@
   background: rgba(37, 48, 42, 0.88);
   color: #edf3ee;
 }
+:root.dark .location[data-card-label]::after {
+  background: rgba(37, 48, 42, 0.94);
+  color: #f5faf6;
+  opacity: 1;
+}
 :root.dark .profile-detail {
   background: #302d3b;
 }
