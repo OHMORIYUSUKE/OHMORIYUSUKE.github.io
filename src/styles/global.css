@@ -840,15 +840,6 @@ footer {
   background: #f1e8d2;
   color: #2a2923;
 }
-.academic-intro {
-  padding: 20px 0 12px;
-}
-.academic-intro > span {
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  opacity: 0.55;
-}
 .academic-links strong,
 .academic-links small {
   display: block;
