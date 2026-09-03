@@ -54,7 +54,7 @@ import {
       </header>
 
       <section class="bento" aria-label="プロフィールとリンク">
-        <article class="card intro span-2x2">
+        <article class="card intro span-2x2" data-card-label="Profile">
           <div class="portrait-switcher" aria-live="polite">
             <img
               class="portrait portrait-alias"
@@ -89,6 +89,7 @@ import {
           socialLinks.slice(0, 1).map((social) => (
             <a
               class={`card social ${social.cardClass}`}
+              data-card-label="Social"
               href={social.url}
               target="_blank"
               rel="noreferrer"
@@ -111,7 +112,11 @@ import {
           ))
         }
 
-        <article class="card location" aria-label={`${location.label}の地図`}>
+        <article
+          class="card location"
+          data-card-label="Location"
+          aria-label={`${location.label}の地図`}
+        >
           <div id="nerima-map" aria-label={`${location.label}周辺を表示する操作可能な地図`}></div>
           <div class="cloud cloud-one"><i></i><i></i><i></i></div>
           <div class="cloud cloud-two"><i></i><i></i><i></i></div>
@@ -125,6 +130,7 @@ import {
           socialLinks.slice(1).map((social) => (
             <a
               class={`card social ${social.cardClass}`}
+              data-card-label="Social"
               href={social.url}
               target="_blank"
               rel="noreferrer"
@@ -147,52 +153,65 @@ import {
           ))
         }
 
-        <a class="card social note-card" href={links.note} target="_blank" rel="noreferrer">
-          <div class="social-icon note-logo">note</div>
+        <a
+          class="card social note-card"
+          data-card-label="Writing"
+          href={links.note}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <div class="social-icon"><img src="/note.svg" alt="" width="29" height="29" /></div>
           <div><strong>note</strong><span>技術と活動の記録</span></div>
           <span class="arrow">↗</span>
         </a>
       </section>
 
-      <section class="profile-detail" id="profile" aria-labelledby="about-heading">
-        <div class="section-heading">
-          <p>01 / About</p>
-          <h2 id="about-heading">これまでの歩みと、<br />学んできたこと。</h2>
-        </div>
-        <div class="bio-copy">
-          {profile.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-          <div class="tags">
-            {
-              profile.tags.map((tag) => (
-                <a href={tag.url} target="_blank" rel="noreferrer">
-                  {tag.title}
-                </a>
-              ))
-            }
+      <div class="chapter-heading" id="profile">
+        <span>Profile</span><h2>これまでの歩みと、<br />学んできたこと。</h2><p>
+          経歴と技術スタック
+        </p>
+      </div>
+      <section class="profile-directory" aria-label="プロフィールと技術スタック">
+        <section class="profile-detail" aria-labelledby="about-heading">
+          <div class="section-heading">
+            <p>About</p>
+            <h2 id="about-heading">プロフィール</h2>
           </div>
-        </div>
-      </section>
+          <div class="bio-copy">
+            {profile.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            <div class="tags">
+              {
+                profile.tags.map((tag) => (
+                  <a href={tag.url} target="_blank" rel="noreferrer">
+                    {tag.title}
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </section>
 
-      <section class="expertise" id="skills" aria-label="技術と経験">
-        <article class="skills-panel">
-          <div class="panel-head"><span>Skills</span><h2>技術スタック</h2><b>25+</b></div>
-          <div class="skill-groups">
-            {
-              skills.map((group) => (
-                <div class="skill-row">
-                  <>
-                    <h3>{group.area}</h3>
-                    <div>
-                      {group.items.map((item) => (
-                        <span>{item}</span>
-                      ))}
-                    </div>
-                  </>
-                </div>
-              ))
-            }
-          </div>
-        </article>
+        <section class="expertise" id="skills" aria-label="技術と経験">
+          <article class="skills-panel" data-card-label="Skills">
+            <div class="panel-head"><h2>技術スタック</h2></div>
+            <div class="skill-groups">
+              {
+                skills.map((group) => (
+                  <div class="skill-row">
+                    <>
+                      <h3>{group.area}</h3>
+                      <div>
+                        {group.items.map((item) => (
+                          <span>{item}</span>
+                        ))}
+                      </div>
+                    </>
+                  </div>
+                ))
+              }
+            </div>
+          </article>
+        </section>
       </section>
 
       <div class="chapter-heading" id="activity">
@@ -201,14 +220,13 @@ import {
         </p>
       </div>
       <section class="directory" aria-label="活動と制作物">
-        <article class="list-panel panel-wide talks-panel">
-          <div class="panel-head"><span>01</span><h2>主な登壇資料</h2><b>{talks.length}</b></div>
+        <article class="list-panel panel-wide talks-panel" data-card-label="Talks">
+          <div class="panel-head"><h2>主な登壇資料</h2></div>
           <div class="link-list talks-list">
             {
-              talks.map((item, index) => (
+              talks.map((item) => (
                 <a href={item.url} target="_blank" rel="noreferrer">
                   <>
-                    <em>{String(index + 1).padStart(2, '0')}</em>
                     <span>{item.title}</span>
                     <i>↗</i>
                   </>
@@ -216,17 +234,14 @@ import {
               ))
             }
             <a href={moreTalksLink.url} target="_blank" rel="noreferrer">
-              <em>…</em>
               <span>{moreTalksLink.title}</span>
               <i>↗</i>
             </a>
           </div>
         </article>
 
-        <article class="list-panel interviews-panel">
-          <div class="panel-head">
-            <span>02</span><h2>インタビュー記事</h2><b>{interviews.length}</b>
-          </div>
+        <article class="list-panel interviews-panel" data-card-label="Interview">
+          <div class="panel-head"><h2>インタビュー記事</h2></div>
           <div class="link-list">
             {
               interviews.map((item) => (
@@ -241,10 +256,8 @@ import {
           </div>
         </article>
 
-        <article class="list-panel warm">
-          <div class="panel-head">
-            <span>03</span><h2>コンピューター雑誌に寄稿</h2><b>{magazines.length}</b>
-          </div>
+        <article class="list-panel warm" data-card-label="Magazine">
+          <div class="panel-head"><h2>コンピューター雑誌に寄稿</h2></div>
           <div class="link-list">
             {
               magazines.map((item) => (
@@ -259,10 +272,8 @@ import {
           </div>
         </article>
 
-        <article class="list-panel panel-wide dark-panel">
-          <div class="panel-head">
-            <span>04</span><h2>技術同人誌に寄稿</h2><b>{techBooks.length}</b>
-          </div>
+        <article class="list-panel panel-wide dark-panel" data-card-label="Books">
+          <div class="panel-head"><h2>技術同人誌に寄稿</h2></div>
           <div class="link-list book-list">
             {
               techBooks.map((item) => (
@@ -277,9 +288,9 @@ import {
           </div>
         </article>
 
-        <article class="list-panel green-panel">
+        <article class="list-panel green-panel" data-card-label="Community">
           <div class="panel-head">
-            <span>05</span><h2>関わっている勉強会・コミュニティー</h2><b>{communities.length}</b>
+            <h2>関わっている勉強会・コミュニティー</h2>
           </div>
           <div class="link-list">
             {
@@ -300,9 +311,9 @@ import {
           </div>
         </article>
 
-        <article class="list-panel conference-panel">
+        <article class="list-panel conference-panel" data-card-label="Event">
           <div class="panel-head">
-            <span>06</span><h2>カンファレンス・運営活動</h2><b>{conferenceWork.length}</b>
+            <h2>カンファレンス・運営活動</h2>
           </div>
           <div class="link-list activity-list">
             {
@@ -320,11 +331,10 @@ import {
           </div>
         </article>
 
-        <article class="list-panel academic-panel">
-          <div class="panel-head"><span>07</span><h2>研究・受賞</h2><b>02</b></div>
+        <article class="list-panel academic-panel" data-card-label="Academic">
+          <div class="panel-head"><h2>研究・受賞</h2></div>
           <div class="academic-intro">
             <span>Academic work</span>
-            <p>公立千歳科学技術大学での研究と、その成果に関する記録です。</p>
           </div>
           <div class="link-list academic-links">
             {
@@ -344,9 +354,14 @@ import {
             }
           </div>
         </article>
+      </section>
 
-        <article class="list-panel pink-panel">
-          <div class="panel-head"><span>08</span><h2>好きなアニメ</h2><b>{anime.length}</b></div>
+      <div class="chapter-heading" id="favourites">
+        <span>Favourites</span><h2>好きなもの、<br />日々の楽しみ。</h2><p>アニメと音楽の記録</p>
+      </div>
+      <section class="directory" aria-label="好きなもの">
+        <article class="list-panel pink-panel" data-card-label="Favourites">
+          <div class="panel-head"><h2>好きなアニメ</h2></div>
           <div class="link-list">
             {
               anime.map((item) => (
@@ -361,8 +376,8 @@ import {
           </div>
         </article>
 
-        <article class="list-panel music-panel">
-          <div class="panel-head"><span>09</span><h2>好きな音楽</h2><b>Playlist</b></div>
+        <article class="list-panel music-panel" data-card-label="Playlist">
+          <div class="panel-head"><h2>好きな音楽</h2></div>
           <div class="spotify-embed">
             <iframe
               src={spotifyPlaylist.src}

@@ -160,6 +160,19 @@ main {
     transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 0.28s;
 }
+.card[data-card-label]::after {
+  position: absolute;
+  z-index: 4;
+  top: 22px;
+  right: 22px;
+  content: attr(data-card-label);
+  color: currentColor;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  opacity: 0.55;
+  text-transform: uppercase;
+}
 .bento > .card {
   grid-column: span 3;
 }
@@ -177,6 +190,10 @@ a.card:hover {
   flex-direction: column;
   justify-content: flex-end;
   background: #fbf4ef;
+}
+.intro[data-card-label]::after {
+  top: 29px;
+  right: 88px;
 }
 .portrait-switcher {
   position: absolute;
@@ -349,13 +366,18 @@ h1 {
 .note-card div span {
   color: rgba(29, 44, 61, 0.62);
 }
-.note-logo {
-  font-size: 18px;
-  letter-spacing: -0.06em;
-}
 .location {
   background: #bec9c0;
   color: #1a241e;
+}
+.location[data-card-label]::after {
+  z-index: 700;
+  top: 14px;
+  right: auto;
+  left: 14px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: rgba(248, 247, 243, 0.86);
 }
 #nerima-map {
   position: absolute;
@@ -535,6 +557,9 @@ footer {
   background: #f7f4fc;
   border: 1px solid var(--line);
 }
+.profile-directory {
+  display: block;
+}
 .section-heading > p {
   margin: 0 0 22px;
   color: var(--muted);
@@ -617,6 +642,27 @@ footer {
   border: 1px solid var(--line);
   background: #f1f7f1;
 }
+.skills-panel[data-card-label],
+.list-panel[data-card-label] {
+  position: relative;
+}
+.skills-panel[data-card-label]::before,
+.list-panel[data-card-label]::before {
+  position: absolute;
+  z-index: 1;
+  top: 17px;
+  left: 30px;
+  content: attr(data-card-label);
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.skills-panel[data-card-label] .panel-head,
+.list-panel[data-card-label] .panel-head {
+  margin-top: 16px;
+}
 .skill-groups {
   margin-top: 4px;
 }
@@ -664,19 +710,13 @@ footer {
 }
 .panel-head {
   display: grid;
-  grid-template-columns: 32px 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: start;
   padding-bottom: 25px;
   border-bottom: 1px solid var(--line);
 }
-.panel-head span,
-.panel-head b {
-  font-size: 9px;
-  font-weight: 500;
-  color: var(--muted);
-}
 .panel-head h2 {
-  margin: -4px 0 0;
+  margin: 0;
   font-size: 22px;
   letter-spacing: -0.04em;
   font-weight: 500;
@@ -700,12 +740,6 @@ footer {
 .link-list a > i {
   font-style: normal;
   font-size: 13px;
-}
-.link-list em {
-  width: 25px;
-  font-size: 9px;
-  color: var(--muted);
-  font-style: normal;
 }
 .link-list strong,
 .link-list small {
@@ -781,21 +815,13 @@ footer {
   color: #2a2923;
 }
 .academic-intro {
-  padding: 24px 0 18px;
+  padding: 20px 0 12px;
 }
 .academic-intro > span {
   font-size: 8px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   opacity: 0.55;
-}
-.academic-intro p {
-  max-width: 330px;
-  margin: 8px 0 0;
-  font-family: Georgia, serif;
-  font-size: 18px;
-  line-height: 1.35;
-  letter-spacing: -0.02em;
 }
 .academic-links strong,
 .academic-links small {
@@ -892,7 +918,7 @@ footer {
     border-radius: 20px;
   }
   .span-2x2 {
-    grid-row: span 3;
+    grid-row: span 2;
   }
   .intro {
     padding: 21px;
@@ -911,6 +937,28 @@ footer {
     right: 18px;
     width: 42px;
     height: 42px;
+  }
+  .card[data-card-label]::after {
+    top: 17px;
+    right: 17px;
+  }
+  .intro[data-card-label]::after {
+    top: 20px;
+    right: 72px;
+  }
+  .location[data-card-label]::after {
+    top: 12px;
+    right: auto;
+    left: 12px;
+  }
+  .skills-panel[data-card-label]::before,
+  .list-panel[data-card-label]::before {
+    top: 14px;
+    left: 22px;
+  }
+  .skills-panel[data-card-label] .panel-head,
+  .list-panel[data-card-label] .panel-head {
+    margin-top: 14px;
   }
   .swap-icon {
     font-size: 18px;
@@ -957,9 +1005,6 @@ footer {
   .list-panel {
     padding: 22px;
     border-radius: 20px;
-  }
-  .panel-head {
-    grid-template-columns: 26px 1fr auto;
   }
   .panel-head h2 {
     font-size: 18px;
