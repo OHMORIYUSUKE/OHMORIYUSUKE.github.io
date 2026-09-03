@@ -19,6 +19,13 @@ import {
   talks,
   techBooks
 } from '../data/portfolio';
+
+const siteOrigin = Astro.site ?? Astro.url;
+const pageUrl = new URL(import.meta.env.BASE_URL, siteOrigin).toString();
+const ogImageUrl = new URL('ogp.jpg', pageUrl).toString();
+const pageTitle = 'うーたん — Server-side Engineer';
+const pageDescription =
+  'サーバーサイドエンジニア・うーたんのポートフォリオ。技術、活動、コミュニティの記録。';
 ---
 
 <!doctype html>
@@ -26,18 +33,26 @@ import {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta
-      name="description"
-      content="うーたん — サーバーサイドエンジニア。勉強会や技術コミュニティの運営にも取り組んでいます。"
-    />
+    <meta name="description" content={pageDescription} />
     <meta name="theme-color" content="#efeee9" />
+    <link rel="canonical" href={pageUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content="うーたんのポートフォリオのプレビュー" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <title>うーたん — Server-side Engineer</title>
+    <title>{pageTitle}</title>
   </head>
   <body>
     <main>
