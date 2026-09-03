@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+
+const homeUrl = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} sizes="any" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>ページが見つかりません — うーたん</title>
+  </head>
+  <body>
+    <main class="not-found">
+      <section class="not-found-card" aria-labelledby="not-found-title">
+        <p class="not-found-code">404</p>
+        <div>
+          <p class="not-found-label">Not found</p>
+          <h1 id="not-found-title">ここには、まだ何もありません。</h1>
+          <p class="not-found-copy">お探しのページは移動したか、存在しないようです。</p>
+        </div>
+        <a class="not-found-link" href={homeUrl}>トップページへ戻る <span>↗</span></a>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  .not-found {
+    display: grid;
+    min-height: 100svh;
+    place-items: center;
+    padding: 24px;
+  }
+  .not-found-card {
+    width: min(100%, 720px);
+    min-height: 390px;
+    padding: clamp(28px, 6vw, 54px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    background: #f7f4fc;
+  }
+  :global(:root.dark) .not-found-card {
+    background: #302d3b;
+  }
+  .not-found-code,
+  .not-found-label {
+    margin: 0;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .not-found-code {
+    align-self: flex-end;
+  }
+  .not-found-label {
+    margin-bottom: 16px;
+  }
+  .not-found h1 {
+    margin: 0;
+    font-size: clamp(36px, 6vw, 58px);
+    line-height: 1.06;
+    letter-spacing: -0.06em;
+    font-weight: 500;
+  }
+  .not-found-copy {
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .not-found-link {
+    display: inline-flex;
+    width: fit-content;
+    gap: 12px;
+    align-items: center;
+    padding-bottom: 4px;
+    border-bottom: 1px solid currentColor;
+    font-size: 13px;
+  }
+  .not-found-link span {
+    font-size: 16px;
+  }
+  .not-found-link:hover {
+    opacity: 0.55;
+  }
+</style>
