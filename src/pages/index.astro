@@ -228,11 +228,34 @@ const pageDescription =
             </div>
           </article>
         </section>
+
+        <section class="expertise" aria-label="研究と受賞">
+          <article class="list-panel academic-panel" data-card-label="Academic">
+            <div class="panel-head"><h2>研究・受賞</h2></div>
+            <div class="link-list academic-links">
+              {
+                academicLinks.map((link) => (
+                  <a href={link.url} target="_blank" rel="noreferrer">
+                    <>
+                      <span>
+                        <>
+                          <strong>{link.title}</strong>
+                          <small>{link.description}</small>
+                        </>
+                      </span>
+                      <i>{link.actionLabel}</i>
+                    </>
+                  </a>
+                ))
+              }
+            </div>
+          </article>
+        </section>
       </section>
 
-      <div class="chapter-heading" id="activity">
-        <span>Activity archive</span><h2>書いたこと、話したこと、<br />場をつくったこと。</h2><p>
-          登壇、寄稿、コミュニティ運営の記録
+      <div class="chapter-heading" id="sharing">
+        <span>Writing &amp; speaking</span><h2>書いたこと、<br />話したこと。</h2><p>
+          登壇、寄稿、取材の記録
         </p>
       </div>
       <section class="directory" aria-label="活動と制作物">
@@ -303,7 +326,14 @@ const pageDescription =
             }
           </div>
         </article>
+      </section>
 
+      <div class="chapter-heading" id="community">
+        <span>Community &amp; events</span><h2>場をつくったこと。</h2><p>
+          勉強会とカンファレンスの記録
+        </p>
+      </div>
+      <section class="directory" aria-label="コミュニティと運営活動">
         <article class="list-panel green-panel" data-card-label="Community">
           <div class="panel-head">
             <h2>関わっている勉強会・コミュニティー</h2>
@@ -346,27 +376,6 @@ const pageDescription =
             }
           </div>
         </article>
-
-        <article class="list-panel academic-panel" data-card-label="Academic">
-          <div class="panel-head"><h2>研究・受賞</h2></div>
-          <div class="link-list academic-links">
-            {
-              academicLinks.map((link) => (
-                <a href={link.url} target="_blank" rel="noreferrer">
-                  <>
-                    <span>
-                      <>
-                        <strong>{link.title}</strong>
-                        <small>{link.description}</small>
-                      </>
-                    </span>
-                    <i>{link.actionLabel}</i>
-                  </>
-                </a>
-              ))
-            }
-          </div>
-        </article>
       </section>
 
       <div class="chapter-heading" id="favourites">
@@ -401,7 +410,10 @@ const pageDescription =
         </article>
       </section>
 
-      <section class="all-links" id="links" aria-label="すべてのプロフィールリンク">
+      <div class="chapter-heading" id="links">
+        <span>Links</span><h2>いろいろなリンク。</h2><p>プロフィールと活動のリンク</p>
+      </div>
+      <section class="all-links" aria-label="すべてのプロフィールリンク">
         <span>Elsewhere</span>
         <div>
           {

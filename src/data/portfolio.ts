@@ -37,13 +37,13 @@ export const socialLinks: SocialLink[] = [
 
 export const footerLinks: ExternalLink[] = [
   { title: 'X', url: links.x },
-  { title: 'note', url: links.note },
-  { title: 'Speaker Deck', url: links.speakerdeck },
+  { title: 'Facebook', url: 'https://www.facebook.com/oy1108' },
   { title: 'connpass', url: links.connpass },
   { title: 'GitHub', url: links.github },
-  { title: 'Zenn', url: 'https://zenn.dev/u_tan' },
-  { title: 'Facebook', url: 'https://www.facebook.com/oy1108' },
-  { title: 'LAPRAS', url: 'https://lapras.com/public/KJDZ8ZH' }
+  { title: 'note', url: links.note },
+  { title: 'LAPRAS', url: 'https://lapras.com/public/KJDZ8ZH' },
+  { title: 'Speaker Deck', url: links.speakerdeck },
+  { title: 'Zenn', url: 'https://zenn.dev/u_tan' }
 ];
 
 export const profile: Profile = {
