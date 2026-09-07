@@ -52,6 +52,8 @@ docs/
 
 コンテンツを変更するときは `src/data/portfolio.ts`、見た目を調整するときは `src/styles/global.css` を編集します。
 
+プロフィール表示はクエリパラメータでも切り替えられます。`?profile=real` で本人情報、`?profile=alias` でハンドルネームを表示します。
+
 ## Deployment
 
 `main` ブランチへの push で GitHub Actions が次を実行します。

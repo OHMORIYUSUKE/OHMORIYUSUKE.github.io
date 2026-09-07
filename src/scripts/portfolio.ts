@@ -27,17 +27,41 @@ const displayName = document.querySelector<HTMLElement>('[data-display-name]');
 const portraitSwitcher = document.querySelector<HTMLElement>('.portrait-switcher');
 const introCard = document.querySelector<HTMLElement>('.intro');
 
-identityToggle?.addEventListener('click', () => {
-  const revealed = identityToggle.classList.toggle('is-revealed');
+type Identity = 'alias' | 'legal';
+
+const getIdentityFromQuery = (): Identity =>
+  new URLSearchParams(window.location.search).get('profile') === 'real' ? 'legal' : 'alias';
+
+const applyIdentity = (identity: Identity) => {
+  const revealed = identity === 'legal';
+  identityToggle?.classList.toggle('is-revealed', revealed);
   portraitSwitcher?.classList.toggle('is-revealed', revealed);
   introCard?.classList.toggle('is-legal', revealed);
-  identityToggle.setAttribute('aria-pressed', String(revealed));
-  identityToggle.setAttribute(
+  identityToggle?.setAttribute('aria-pressed', String(revealed));
+  identityToggle?.setAttribute(
     'aria-label',
     revealed ? 'うーたんの表示へ戻す' : '本人写真と名前を表示する'
   );
   if (displayName) displayName.textContent = revealed ? '大森 裕介 / Yusuke Ohmori' : 'うーたん';
+};
+
+const syncIdentityQuery = (identity: Identity) => {
+  const url = new URL(window.location.href);
+  url.searchParams.set('profile', identity === 'legal' ? 'real' : 'alias');
+  window.history.replaceState({}, '', url);
+};
+
+applyIdentity(getIdentityFromQuery());
+
+identityToggle?.addEventListener('click', () => {
+  const nextIdentity: Identity = identityToggle.classList.contains('is-revealed')
+    ? 'alias'
+    : 'legal';
+  applyIdentity(nextIdentity);
+  syncIdentityQuery(nextIdentity);
 });
+
+window.addEventListener('popstate', () => applyIdentity(getIdentityFromQuery()));
 
 const greeting = document.querySelector<HTMLElement>('[data-greeting]');
 const greetings = ['こんにちは、', 'Hello,', 'Hola,', 'Bonjour,', 'Ciao,', '안녕하세요,', '你好，'];
